@@ -1,41 +1,69 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Blog by JackieZhang</title>
+<head>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Blog</h1>
-        <p>very simple blog</p>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Sec Blog</title>
+<script src="/jquery/jquery-1.10.2.js"></script>
+<script>
+function show(uri){
+$.get('/blog/a/'+uri+".txt",function(data){
+$("#content").html("<pre>"+data+"</pre>");
+});
+}
 
-        <p class="view"><a href="https://github.com/JackieZhang/blog">View the Project on GitHub <small>JackieZhang/blog</small></a></p>
+</script>
+<script>
+h = location.hash;
+if(h.length > 1){
+	show(h.substr(1));
+}
+</script>
+<style>
+#articles{
+min-width:120px;
+max-width:150px;
+float:left;
+margin-left:5px;
+padding-left:8px;
+border:1px solid #999;
+}
+#content{
+width:auto;
+min-width:800px;
+float:left;
+margin-left:5px;
+padding-left:8px;
+border:1px solid #999;
+}
 
-
-        <ul>
-          <li><a href="https://github.com/JackieZhang/blog/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/JackieZhang/blog/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/JackieZhang/blog">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p>test</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/JackieZhang">JackieZhang</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+</style>
+</head>
+<body>
+<script>
+function geta(){
+$.get('/blog/a.txt',function(data){
+d = data.split(',');
+s ='';
+for ( a in d){
+s += "<a href=#" + d[a] + " onclick=show('"+d[a]+"')" + " title='"+d[a] +"'>";
+console.log(d[a].length);
+if(d[a].length > 20){ 
+s += d[a].substr(0,18)+"..."; }
+else{
+s += d[a];
+}
+s += "</a><br/>";
+}
+$('#articles').html(s);
+});
+}
+geta();
+</script>
+<div id="articles">
+</div>
+<div id="content">
+</div>
+</body>
 </html>
+
