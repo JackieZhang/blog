@@ -47,7 +47,7 @@ d = data.split(',');
 s ='';
 for ( a in d){
 s += "<a href=#" + d[a] + " onclick=show('"+d[a]+"')" + " title='"+d[a] +"'>";
-console.log(d[a].length);
+
 if(d[a].length > 20){ 
 s += d[a].substr(0,18)+"..."; }
 else{
